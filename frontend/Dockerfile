@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN flutter pub get
-RUN flutter build web
+RUN flutter build web --release
 
 
 FROM python:3.11-slim
