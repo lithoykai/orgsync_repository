@@ -18,5 +18,4 @@ COPY --from=build /app/build/web .
 
 EXPOSE 5000
 
-
-CMD ["python3", "-m", "http.server", "5000"]
+CMD ["python3", "-m", "http.server", "5000", "--bind", "0.0.0.0"]
