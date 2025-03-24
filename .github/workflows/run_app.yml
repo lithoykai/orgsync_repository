@@ -1,0 +1,25 @@
+name: Deploy OrgSync Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    name: Build and Deploy OrgSync
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Executar via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd orgsync
+            git pull origin main
+            docker compose down
+            docker compose --env-file .env up -d --build
